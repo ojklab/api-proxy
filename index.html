@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+  </head>
+  <body>
+    <!-- HTML -->
+    <div id="app">
+      <button @click="connectAPI">郵便番号</button>
+      <p v-if="appData">{{appData}}</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      let app = new Vue({
+        el: "#app",
+        data: {
+          postData: {},
+          appData: {},
+        },
+        methods: {
+          // APIからデータ取得したい場合はこのメソッドを呼び出す
+          connectAPI: async function () {
+            /* 外部APIに送るデータを用意 */
+            this.postData = {
+              // 外部APIのURL
+              url: "http://zipcloud.ibsnet.co.jp/api/search", // 例：郵便番号API
+
+              // GET or POST
+              method: "GET",
+
+              // Headersは必要に応じて
+              headers: {
+                
+              },
+
+              // 外部APIに送るクエリー（GETの場合）
+              query: {
+                // 例：郵便番号API
+                zipcode: "6638137",
+              },
+
+              // 外部APIに送るBody（POSTの場合）
+              body: {},
+            };
+
+            /* 以下はapiproxy.tsへの接続なので書き換えない */
+            const response = await fetch("http://localhost", {
+              method: "POST",
+              mode: "same-origin",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(this.postData),
+            });
+
+            /* 戻ってきたAPIデータを受け取る */
+            if (response.ok) {
+              const json = await response.json();
+              this.appData = json;
+            } else {
+              console.log("API connect failed...");
+            }
+          }, // connectAPI
+        }, // methods
+      }); // Vue
+    </script>
+  </body>
+</html>
