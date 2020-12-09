@@ -23,7 +23,7 @@ app.post("/", contentTypeFilter("application/json"), async (req) => {
   // POSTで渡すパラメータの準備
   const options: any = {
     method: "POST",
-    mode: "cors",
+    mode: "same-origin",
     headers: new Headers({
       "Content-Type": "application/json, charset=utf-8",
     }),
