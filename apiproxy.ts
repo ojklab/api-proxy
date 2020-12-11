@@ -1,7 +1,7 @@
 import {
   contentTypeFilter,
   createApp,
-} from "https://servestjs.org/@v1.1.7/mod.ts";
+} from "https://servestjs.org/@/mod.ts";
 
 const app = createApp();
 
