@@ -12,17 +12,17 @@ OJKの授業で使用するために作成。
 
 3. ターミナルに以下のコマンドを打ち込んでEnterキーを押す（Denoというソフトウェアがインストールされるのでしばらく待つ）
 
-Windows（PowerShell）の場合：
-iwr https://deno.land/x/install/install.ps1 -useb | iex
+ Windows（PowerShell）の場合：
+ iwr https://deno.land/x/install/install.ps1 -useb | iex
 
-MacやWindows（Git Bash）の場合：
-curl -fsSL https://deno.land/x/install/install.sh | sh
+ MacやWindows（Git Bash）の場合：
+ curl -fsSL https://deno.land/x/install/install.sh | sh
 
-～以上は1度やればOK～
+ ～以上は1度やればOK～
 
 4. ターミナルに以下のコマンドを打ち込んでEnterキーを押す。初回は文字がたくさん表示されるが、最後に「servest:router listening on :80」と表示されたらOK。このターミナルは作業中は閉じないこと。
 
-deno run --allow-net --allow-read apiproxy.ts
+ deno run --allow-net --allow-read apiproxy.ts
 
 5. ブラウザのアドレスバーに「localhost」と打ち込んでEnterキーを押すとサンプルプログラム（index.html）が実行される。
 
