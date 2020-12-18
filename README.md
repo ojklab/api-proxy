@@ -11,17 +11,17 @@ OJKの授業で使用するために作成。
 2. 何かしらターミナルを開く。Windowsの場合、ファイルのあるフォルダをエクスプローラで開いてロケーションバーに「powershell」と打ち込むとその場所を起点としてPowerShellが起動する。
 
 3. ターミナルに以下のコマンドを打ち込んでEnterキーを押す（Denoというソフトウェアがインストールされるのでしばらく待つ）  
-<br>
+
  - Windows（PowerShell）の場合：  
  iwr https://deno.land/x/install/install.ps1 -useb | iex
-<br> 
+
  - MacやWindows（Git Bash）の場合：  
  curl -fsSL https://deno.land/x/install/install.sh | sh
-<br> 
+
  ～以上は1度やればOK～
 
 4. ターミナルに以下のコマンドを打ち込んでEnterキーを押す。初回は文字がたくさん表示されるが、最後に「servest:router listening on :80」と表示されたらOK。このターミナルは作業中は閉じないこと。
-<br>
+
  deno run --allow-net --allow-read apiproxy.ts
 
 5. ブラウザのアドレスバーに「localhost」と打ち込んでEnterキーを押すとサンプルプログラム（index.html）が実行される。
