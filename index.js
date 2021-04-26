@@ -16,32 +16,24 @@ async function handleRequest(req) {
   }
 
   const params = await req.json();
-  console.log(params);
 
-  // Headersの追加
-  const options = {};
+  const headers = {};
   if (params.headers) {
     for (const [key, value] of Object.entries(params.headers)) {
-      if (key === "Content-Type" || key === "mode") {
-        options["headers"].set(key, value);
-      } else {
-        options["headers"].append(key, value);
-      }
+      headers[key] = value;
     }
   }
 
   let apiRes;
   if (params.method === "GET") {
     const query = new URLSearchParams(params.query);
-    apiRes = await fetch(`${params.url}?${query}`);
+    apiRes = await fetch(`${params.url}?${query}`, headers);
   } else if (params.method === "POST") {
     const options = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json, charset=utf-8",
-      },
+      headers: headers,
+      body: JSON.stringify(params.body)
     };
-    options["body"] = JSON.stringify(params.body);
     apiRes = await fetch(params.url, options);
   } else {
     resError({ message: 'A method in body should be GET or POST' });
@@ -57,7 +49,9 @@ async function handleRequest(req) {
       }
     });
   } else {
-    resError(res);
+    console.log("API response error:");
+    console.log(apiRes);
+    resError(apiRes);
   }
 }
 
