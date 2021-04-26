@@ -47,8 +47,8 @@
             // console.log(JSON.stringify(this.postData));
 
             /* 以下はAPIプロキシへの接続なので書き換えない */
-            // const response = await fetch('https://api-proxy.deno.dev', {
-            const response = await fetch('http://localhost:8080', {
+            const response = await fetch('https://api-proxy.deno.dev', {
+              // const response = await fetch('http://localhost:8080', {
               method: 'POST',
               body: JSON.stringify(this.postData),
             });
