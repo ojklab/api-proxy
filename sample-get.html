@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>APIプロキシに接続する素のJavaScriptのGETサンプル</title>
+  </head>
+  <body>
+    <!-- HTML -->
+    <main style="margin: 50px">
+      <label>郵便番号<input value="1000001" /></label> <button>検索</button>
+      <div style="margin-top: 30px"></div>
+    </main>
+    <!-- JavaScript -->
+    <script>
+      document.querySelector("button").addEventListener("click", async () => {
+        const zipcode = document.querySelector("input").value;
+
+        /* 外部APIに送るデータを用意 */
+        const apiProxyData = {
+          // 外部APIのURL
+          url: "http://zipcloud.ibsnet.co.jp/api/search", // 例：郵便番号API
+
+          // GET or POST
+          method: "GET",
+
+          // Headersは必要に応じて
+          headers: {},
+
+          // 外部APIに送るクエリー（GETの場合）
+          query: {
+            // 例：郵便番号API
+            zipcode: zipcode,
+          },
+
+          // 外部APIに送るBody（POSTの場合）
+          body: {},
+        };
+
+        // console.log(JSON.stringify(this.postData));
+
+        /* 以下はAPIプロキシへの接続なので書き換えない */
+        const response = await fetch("https://api-proxy.deno.dev", {
+          method: "POST",
+          body: JSON.stringify(apiProxyData),
+        });
+        /* ここまでは書き換えない */
+
+        /* 戻ってきたAPIデータを受け取る */
+        if (response.ok) {
+          const json = await response.json();
+          document.querySelector("div").textContent = JSON.stringify(json);
+        } else {
+          console.log("API connect failed...");
+        }
+      });
+    </script>
+  </body>
+</html>
