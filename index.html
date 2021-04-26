@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
       let app = new Vue({
-        el: "#app",
+        el: '#app',
         data: {
           postData: {},
           appData: {},
@@ -26,31 +26,30 @@
             /* 外部APIに送るデータを用意 */
             this.postData = {
               // 外部APIのURL
-              url: "http://zipcloud.ibsnet.co.jp/api/search", // 例：郵便番号API
+              url: 'http://zipcloud.ibsnet.co.jp/api/search', // 例：郵便番号API
 
               // GET or POST
-              method: "GET",
+              method: 'GET',
 
               // Headersは必要に応じて
-              headers: {
-                
-              },
+              headers: {},
 
               // 外部APIに送るクエリー（GETの場合）
               query: {
                 // 例：郵便番号API
-                zipcode: "1000001",
+                zipcode: '1000001',
               },
 
               // 外部APIに送るBody（POSTの場合）
               body: {},
             };
 
-            /* 以下はapiproxy.tsへの接続なので書き換えない */
-            const response = await fetch("http://localhost", {
-              method: "POST",
-              mode: "same-origin",
-              headers: { "Content-Type": "application/json" },
+            // console.log(JSON.stringify(this.postData));
+
+            /* 以下はAPIプロキシへの接続なので書き換えない */
+            // const response = await fetch('https://api-proxy.deno.dev', {
+            const response = await fetch('http://localhost:8080', {
+              method: 'POST',
               body: JSON.stringify(this.postData),
             });
 
@@ -59,7 +58,7 @@
               const json = await response.json();
               this.appData = json;
             } else {
-              console.log("API connect failed...");
+              console.log('API connect failed...');
             }
           }, // connectAPI
         }, // methods
